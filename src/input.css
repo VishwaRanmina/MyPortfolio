@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Generated using https://material-foundation.github.io/material-theme-builder/ */
+/* `--md-sys` var prefix has been shortened to just `--` for the sake of readability */
+/* Selector has been rewritten from `.light` to `[data-theme="light"]` */
+/* Script for easy theme cleanup: https://gitlab.com/tailmate/tailmate/-/blob/main/strip_md_sys_prefix.sh */
+/* WebApp (CodePen) for easy theme cleanup: https://codepen.io/nickgirga/full/dPobjwz */
+[data-theme="light"] {
+  --color-primary: rgb(140 74 94);
+  --color-surface-tint: rgb(140 74 94);
+  --color-on-primary: rgb(255 255 255);
+  --color-primary-container: rgb(255 217 225);
+  --color-on-primary-container: rgb(112 51 70);
+  --color-secondary: rgb(116 86 94);
+  --color-on-secondary: rgb(255 255 255);
+  --color-secondary-container: rgb(255 217 225);
+  --color-on-secondary-container: rgb(91 63 70);
+  --color-tertiary: rgb(114 81 136);
+  --color-on-tertiary: rgb(255 255 255);
+  --color-tertiary-container: rgb(243 218 255);
+  --color-on-tertiary-container: rgb(89 58 110);
+  --color-error: rgb(186 26 26);
+  --color-on-error: rgb(255 255 255);
+  --color-error-container: rgb(255 218 214);
+  --color-on-error-container: rgb(147 0 10);
+  --color-background: rgb(255 248 248);
+  --color-on-background: rgb(34 25 27);
+  --color-surface: rgb(255 248 248);
+  --color-on-surface: rgb(34 25 27);
+  --color-surface-variant: rgb(242 221 225);
+  --color-on-surface-variant: rgb(81 67 70);
+  --color-outline: rgb(132 115 118);
+  --color-outline-variant: rgb(214 194 197);
+  --color-shadow: rgb(0 0 0);
+  --color-scrim: rgb(0 0 0);
+  --color-inverse-surface: rgb(56 46 48);
+  --color-inverse-on-surface: rgb(254 237 239);
+  --color-inverse-primary: rgb(255 177 198);
+  --color-primary-fixed: rgb(255 217 225);
+  --color-on-primary-fixed: rgb(58 7 27);
+  --color-primary-fixed-dim: rgb(255 177 198);
+  --color-on-primary-fixed-variant: rgb(112 51 70);
+  --color-secondary-fixed: rgb(255 217 225);
+  --color-on-secondary-fixed: rgb(43 21 27);
+  --color-secondary-fixed-dim: rgb(227 189 197);
+  --color-on-secondary-fixed-variant: rgb(91 63 70);
+  --color-tertiary-fixed: rgb(243 218 255);
+  --color-on-tertiary-fixed: rgb(43 12 64);
+  --color-tertiary-fixed-dim: rgb(223 184 246);
+  --color-on-tertiary-fixed-variant: rgb(89 58 110);
+  --color-surface-dim: rgb(230 214 216);
+  --color-surface-bright: rgb(255 248 248);
+  --color-surface-container-lowest: rgb(255 255 255);
+  --color-surface-container-low: rgb(255 240 242);
+  --color-surface-container: rgb(251 234 236);
+  --color-surface-container-high: rgb(245 228 231);
+  --color-surface-container-highest: rgb(239 223 225);
+}
+
+/* App-wide Styles */
+body {
+	background-color: var(--color-surface);
+	font-family: var(--font-roboto);
+}
+
+@layer components {
+  /* Navigation bar wrapper */
+  .navbar {
+    @apply relative flex flex-row items-center justify-center w-full h-20 bg-[var(--color-surface-container-low)] text-[var(--color-on-surface)] select-none;
+  }
+
+  /* Inner container that holds all navbar items */
+  .navbar-container {
+    @apply h-full w-full min-w-[20rem] max-w-[40rem] flex flex-row items-center justify-center gap-2 px-2;
+  }
+
+  /* Individual clickable navbar item */
+  .navbar-item {
+    @apply w-full h-full flex flex-col items-center justify-center text-center align-middle text-sm;
+  }
+
+  /* Icon inside each navbar item (default/inactive state) */
+  .navbar-item-icon {
+    @apply relative items-center justify-center w-16 h-8 rounded-full;
+    font-variation-settings: 'FILL' 0;
+    /* Center all real children (absolute) */
+    & > * {
+      @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+    }
+    /* Fill background with pseudo-element */
+    &::before {
+      @apply absolute flex bg-black/0 inset-0 rounded-full transition duration-200 scale-x-[0%];
+      content: "";
+    }
+  }
+
+  /* Icon when the parent item is hovered */
+  .navbar-item:hover .navbar-item-icon,
+  /* Icon when the parent item is actively being clicked */
+  .navbar-item:active .navbar-item-icon,
+  /* Icon when the item is in an active/selected state */
+  .navbar-item-active .navbar-item-icon {
+    @apply flex flex-col items-center justify-center w-16 h-8 rounded-full;
+    font-variation-settings: 'FILL' 1;
+  }
+
+  /* Background color change and scale on hover or active state */
+  .navbar-item:hover .navbar-item-icon,
+  .navbar-item-active .navbar-item-icon {
+    &::before {
+      @apply scale-x-[100%];
+      background-color: color-mix(
+        in srgb,
+        var(--color-surface-container-low) 70%,
+        var(--color-primary)
+      );
+    }
+  }
+
+  /* Background color change and scale on active press */
+  .navbar-item:active .navbar-item-icon {
+    &::before {
+      @apply scale-x-[100%];
+      background-color: color-mix(
+        in srgb,
+        var(--color-surface-container-low) 60%,
+        var(--color-primary)
+      );
+    }
+  }
+}
